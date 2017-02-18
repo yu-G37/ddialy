@@ -1,0 +1,752 @@
+@charset "utf-8";
+/*
+ * Copyright (C) 2012-2014 NS Solutions Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * hifive-ui css
+ *   version v20151210
+ *   gitCommitId : f5cbbaaa44e3aede6ff64be3662e81640485643f
+ *   build at 2015/12/10 17:09:43.541 (+0900)
+ *   (aceEditor,animate,appContainer,arrowbox,artboard-core-command,artboard,artboard-core,artboardViewer,calendar,carousel,chart,combobox,contextMenu,virtualScroll,datagrid,dividedBox,graph,magnetContainer,popup,pdf,replaceBox,screen,tabbable,tileContainer)
+ */
+.h5-alert {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #fcf8e3;
+	padding: 10px;
+	margin: 25px;
+}
+
+.h5-alert .msg {
+	color: red;
+	font-weight: bold;
+}
+
+.h5-alert .close-btn {
+	float: right;
+	color: #555;
+	background-color: #fcf8e3;
+	border: 1px solid #555;
+	cursor: pointer;
+	font-size: 20px;
+	font-weight: bold;
+	position: relative;
+	left: -15px;
+	padding: 3px;
+}
+
+.h5-alert .response {
+	background-color: #fff;
+	border: 3px double #000;
+	margin-top: 10px;
+	height: 264px;
+	overflow: auto;
+}
+/* 吹き出し(共通) */
+.h5arrowbox {
+	padding: 5px;
+	position: absolute;
+	background: #ffffee;
+	border: 1px solid #124;
+	display: none;
+}
+
+/* 吹き出し(上) */
+.h5arrowbox.up:after,.h5arrowbox.up:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.h5arrowbox.up:after {
+	border-color: rgba(255, 255, 238, 0);
+	border-top-color: #ffffee;
+	border-width: 30px;
+	margin-left: -30px;
+}
+
+.h5arrowbox.up:before {
+	border-color: rgba(21, 34, 66, 0);
+	border-top-color: #152242;
+	border-width: 31px;
+	margin-left: -31px;
+}
+
+/** 吹き出し(下) **/
+.h5arrowbox.down:after,.h5arrowbox.down:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.h5arrowbox.down:after {
+	border-color: rgba(255, 255, 238, 0);
+	border-bottom-color: #ffffee;
+	border-width: 30px;
+	margin-left: -30px;
+}
+
+.h5arrowbox.down:before {
+	border-color: rgba(21, 34, 66, 0);
+	border-bottom-color: #152242;
+	border-width: 31px;
+	margin-left: -31px;
+}
+
+/** 吹き出し(左) **/
+.h5arrowbox.left:after,.h5arrowbox.left:before {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.h5arrowbox.left:after {
+	border-color: rgba(255, 255, 238, 0);
+	border-left-color: #ffffee;
+	border-width: 30px;
+	margin-top: -30px;
+}
+
+.h5arrowbox.left:before {
+	border-color: rgba(21, 34, 66, 0);
+	border-left-color: #152242;
+	border-width: 31px;
+	margin-top: -31px;
+}
+
+/** 吹き出し(右) **/
+.h5arrowbox.right:after,.h5arrowbox.right:before {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.h5arrowbox.right:after {
+	border-color: rgba(255, 255, 238, 0);
+	border-right-color: #ffffee;
+	border-width: 30px;
+	margin-top: -30px;
+}
+
+.h5arrowbox.right:before {
+	border-color: rgba(21, 34, 66, 0);
+	border-right-color: #152242;
+	border-width: 31px;
+	margin-top: -31px;
+}
+.h5-artboard-canvas-wrapper {
+	position: relative;
+	overflow: hidden;
+	touch-action: none;
+	-webkit-user-select: none;
+}
+
+.h5-artboard-canvas-wrapper canvas,.h5-artboard-canvas-wrapper .h5-artboard-layers,.h5-artboard-canvas-wrapper .h5-artboard-layers>*
+	{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* 背景画像のdiv */
+.h5-artboard-canvas-wrapper .background-layer {
+	width: 100%;
+	height: 100%;
+}
+
+.h5-artboard-canvas-wrapper .background-layer>* {
+	position: absolute;
+}
+
+/** 選択された図形を表すための要素 **/
+.h5-artboard-canvas-wrapper .selection-rectangle {
+	position: absolute;
+	box-sizing: border-box;
+	border: 2px dashed #f0f;
+	cursor: all-scroll;
+	/* IEで背景色指定無しだとイベントが透過するのでその対策 */
+	background-color: rgba(0, 0, 0, 0);
+}
+
+/** 範囲選択時のトラック操作中に表示する要素 **/
+.h5-artboard-canvas-wrapper .selection-scope-rectangle {
+	position: absolute;
+	box-sizing: border-box;
+	border: 1px dashed #333;
+	display: none;
+}
+
+/** 拡大表示機能 **/
+.h5-artboard-magnifier {
+	position: absolute;
+	overflow: hidden;
+	background-color: #fff;
+	border: 1px solid #ccc;
+}
+
+.h5-artboard-magnifier .h5-artboard-canvas-wrapper {
+	width: 100%;
+	height: 100%;
+}
+/* default size of calendar */
+.calendar {
+	width: 400px;
+	-webkit-transform: translate3d(0, 0, 0);
+	transition: -webkit-transform .5s ease;
+}
+
+/* Core style for every cell */
+.core {
+	-webkit-box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	font-size: 16px;
+	text-align: center;
+	vertical-align: top;
+	cursor: pointer;
+	position: relative;
+}
+
+table {
+	border-collapse: collapse;
+	margin: 1px;
+}
+
+/* Cell border */
+.border {
+	border-style: solid;
+	border-width: 0;
+	border-color: black;
+}
+
+.outday {
+	color: #bbb !important;
+}
+
+/* Weekend days */
+.sat,.sun {
+	font-weight: bold;
+}
+
+.selected {
+	background-color: orange !important;
+}
+
+.today {
+	background: aqua;
+}
+
+.noday {
+	color: #bbb;
+	font-weight: normal;
+	cursor: auto;
+	background: #ddd;
+}
+
+.style1 {
+	color: red;
+	font-weight: bold;
+	background: blue;
+}
+
+.tooltips {
+	position: absolute;
+	z-index: 9999 !important;
+	padding: 0.3em 0.5em;
+	/*  	 bottom: -1.8em; */
+	color: #FFFFFF;
+	background: #c72439;
+}
+
+.tooltips:after {
+	width: 100%;
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0.5em;
+	top: -8px;
+	border-top: 8px solid transparent;
+	border-left: 8px solid #c72439;
+}
+
+.prev-arrow-off,.next-arrow-off {
+	color: #000;
+	opacity: 0.15;
+	display: none;
+}
+
+/* .prev-arrow, */
+/* .next-arrow { */
+/* 	cursor: pointer; */
+/* } */
+v\:group {
+	zoom: 1;
+	position:absolute;
+}
+
+v\:shape, v\:line, v\:fill, v\:stroke,
+ v\:roundrect, v\:oval, v\:path, v\:vmlframe,
+ v\:shapetype, v\:rect, v\:textbox {
+		behavior: url(#default#VML);
+		display:inline-block;
+	}
+
+v\:group#h5_chart {
+	left: 0px;
+	position: relative;
+}
+
+svg {
+	overflow: hidden;
+}
+
+#h5_chart .vml_absolute {
+	position: absolute;
+	left: 50px;
+	zoom: 1;
+}
+
+#h5_chart .candleStickChart {
+	left: 0px;
+	top: 0px;
+	position: absolute;
+	zoom: 1;
+}
+
+#vert_lines .xLabel {
+	font-size: 9px;
+	position: absolute;
+}
+.combobox-root {
+	border-spacing: 0;
+	border-collapse: separate;
+	position: relative;
+	display: table;
+}
+
+.combobox-input {
+	position: relative;
+}
+
+.combobox-menu-wrapper {
+	position: relative;
+	display: table-cell;
+}
+
+.combobox-menu {
+	margin: 0;
+	position: absolute;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	height: 150px;
+	background-color: white;
+	border: 1px solid gray;
+	box-sizing: content-box;
+}
+
+.combobox-dropdown-btn-wrapper {
+	width: 1px;
+	text-align: center;
+	position: relative;
+	white-space: nowrap;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.combobox-dropdown-btn {
+	cursor: pointer;
+	width: 18px;
+	padding: 0;
+	position: relative;
+	box-sizing: border-box;
+	background: #e3e3e3;
+	border: #707070 1px solid;
+	background-image: -webkit-linear-gradient(top, #fcfcfc, #cfcfcf);
+	background-image: -moz-linear-gradient(top, #fcfcfc, #cfcfcf);
+	background-image: -ms-linear-gradient(top, #fcfcfc, #cfcfcf);
+	background-image: -o-linear-gradient(top, #fcfcfc, #cfcfcf);
+	background-image: linear-gradient(to bottom, #fcfcfc, #cfcfcf);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc, endColorstr=#cfcfcf);
+}
+
+.combobox-dropdown-btn:hover {
+	background: #c4c4c4;
+	background-image: -webkit-linear-gradient(top, #cfcfcf, #9c9c9c);
+	background-image: -moz-linear-gradient(top, #cfcfcf, #9c9c9c);
+	background-image: -ms-linear-gradient(top, #cfcfcf, #9c9c9c);
+	background-image: -o-linear-gradient(top, #cfcfcf, #9c9c9c);
+	background-image: linear-gradient(to bottom, #cfcfcf, #9c9c9c);
+}
+
+.combobox-dropdown-btn-icon {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	color: #000;
+	vertical-align: middle;
+	border-color: #333;
+	border-top: 4px solid;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+}
+
+.combobox-dropdown-menu-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: white;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+.combobox-dropdown-menu-visibility-hidden {
+	visibility: hidden
+}
+
+.combobox-dropdown-menu-visibility-visible {
+	visibility: visible;
+}
+
+.combobox-dropdown-menu-highlight {
+	background-color: #39f;
+}
+.combobox-menu-wrapper .virtual-scroll-box-render-target{
+	width : 100%;
+	text-align: left;
+}
+.dividedBox {
+	padding: 0px;
+}
+
+.dividedBox>* {
+	margin: 0px;
+}
+
+.dividedBox.horizontal {
+	white-space: nowrap;
+}
+
+.dividedBox.horizontal>* {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.dividedBox.horizontal>.fill {
+	height: 100%;
+}
+
+.dividedBox.horizontal>.divider {
+	display: inline-block;
+	width: 4px;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.dividedBox.vertical>* {
+	display: block;
+}
+
+.dividedBox.vertical>.fill {
+	width: 100%;
+}
+
+.dividedBox.vertical>.divider {
+	display: block;
+	width: 100%;
+	height: 4px;
+}
+
+.dividedBox>.divider {
+	overflow: visible;
+}
+
+.dividerHandler {
+	width: 30px;
+	height: 30px;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-o-border-radius: 15px;
+	-ms-border-radius: 15px;
+}
+
+.dividedBox.vertical>.divider .dividerHandler {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.divider,.dividerHandler {
+	background-color: yellow;
+}
+.default_node {
+	word-break: break-all;
+	height: 50px;
+	width: 100px;
+}
+
+.edge {
+	stroke: black;
+	stroke-width: 1px;
+	fill: none;
+}
+
+.edge.fromPointArrow {
+	stroke: black;
+	stroke-width: 1px;
+}
+
+.edge.fromPointArrow.fill {
+	fill: black;
+}
+
+.edge.endPointArrow {
+	stroke: black;
+	stroke-width: 1px;
+}
+
+.edge.endPointArrow.fill {
+	fill: black;
+}
+
+.edge.fromPointCircle {
+	fill: white;
+}
+
+.edge.fromPointCircle.fill {
+	fill: black;
+}
+
+.edge.endPointCircle {
+	fill: white;
+}
+
+.edge.endPointCircle.fill {
+	fill: black;
+}
+
+.edge.fromPointDiamond {
+	fill: white;
+}
+
+.edge.fromPointDiamond.fill {
+	fill: black;
+}
+
+.edge.endPointDiamond {
+	fill: white;
+}
+
+.edge.endPointDiamond.fill {
+	fill: black;
+}
+
+.edge.fromPointRect {
+	fill: white;
+}
+
+.edge.fromPointRect.fill {
+	fill: black;
+}
+
+.edge.endPointRect {
+	fill: white;
+}
+
+.edge.endPointRect.fill {
+	fill: black;
+}
+
+.dragSelectOverlay {
+	position: absolute;
+	opacity: 0.4;
+	border: 3px solid green;
+	background-color: #7fffd4;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.h5mag-groupHandle {
+	position: absolute;
+	z-index: 6;
+	height: 44px;
+	width: 44px;
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+.h5mag-groupWrap {
+	position: absolute;
+	z-index: 0;
+	border: #ccc 2px solid;
+	box-sizing: border-box;
+	background-color: rgba(240, 240, 240, 0.5);
+}
+
+.magnetDragging{
+	z-index: 2;
+}
+.h5Popup {
+	margin: 0;
+	padding: 0;
+	background-color: #303030;
+	border: solid 1px black;
+	color: #f5f5f5;
+	z-index: 9997;
+	box-shadow: 10px 10px 10px 3px rgba(0, 0, 0, 0.7);
+	-moz-box-shadow: 10px 10px 10px 3px rgba(0, 0, 0, 0.7);
+	-o-box-shadow: 10px 10px 10px 3px rgba(0, 0, 0, 0.7);
+	-ms-box-shadow: 10px 10px 10px 3px rgba(0, 0, 0, 0.7);
+
+	/** IE8以下のみ **/
+	filter: progid:DXImageTransform.Microsoft.Shadow(Color='#030303', Direction=125, Strength=10) \9;
+}
+
+.h5Popup.current {
+	z-index: 9999;
+}
+
+.h5Popup .popupDragger {
+	cursor: crosshair;
+}
+
+.popupHeader {
+	height: 33px;
+	width: 100%;
+}
+
+.popupHeader>h1 {
+	line-height: 18px;
+	margin: 7px;
+	font-size: 18px;
+	display: inline-block;
+}
+
+.popupHeader>.popupCloseBtn {
+	/** bootstrapから流用 **/
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	padding: 5px;
+	margin: 0;
+	height: 15px;
+	line-height: 15px;
+	cursor: pointer;
+	text-align: center;
+	vertical-align: middle;
+	background-color: #da4f49;
+	background-color: #da4f49;
+	background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b), to(#bd362f));
+	background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+	background-image: -o-linear-gradient(top, #ee5f5b, #bd362f);
+	background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
+	border: 1px solid;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	width: 13px;
+	height: 13px;
+	box-sizing: content-box;
+}
+
+.popupHeader>.popupCloseBtn:hover {
+	background-color: #bd362f;
+}
+
+.popupHeader>.popupCloseBtn>.icon-remove {
+	/** bootstrapから流用 **/
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	font-family: 'Impact','Verdana', sans-serif;
+	font-size: 20pt;
+	color: black;
+	background-image: url("data:image/svg+xml;base64, PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMyAxMycgd2lkdGg9JzEzJyBoZWlnaHQ9JzEzJyB2ZXJzaW9uPScxLjEnPjxwYXRoIHN0eWxlPSdmaWxsOiBub25lOyBzdHJva2U6ICMwMDAwMDA7IHN0cm9rZS13aWR0aDogMzsnIGQ9J00gMS41IDExLjUgQyAxMS41IDEuNSAxMS41IDEuNSAxMS41IDEuNScgLz48cGF0aCBzdHlsZT0nZmlsbDogbm9uZTsgc3Ryb2tlOiAjMDAwMDAwOyBzdHJva2Utd2lkdGg6IDM7JyBkPSdNIDExLjUgMTEuNSBDIDEuNSAxLjUgMS41IDEuNSAxLjUgMS41JyAvPjwvc3ZnPg==");
+	background-repeat: no-repeat;
+}
+
+.popupContents {
+	width: 100%;
+}
+
+/** オーバレイ **/
+.h5PopupOverlay{
+	position:absolute;
+	background-color: #000;
+	opacity: 0.6;
+	filter: alpha(opacity=60);
+	height: 100%;
+	width: 100%;
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	top: 0;
+	left: 0;
+	z-index: 9998;
+}
+.screen {
+	/** スクリーン要素は準備できるまで非表示 **/
+	visibility: hidden;
+}
+
+/* アニメーション中はscreenの横にはみ出たものが見えないようにする */
+.screen.inOperation.horizonal {
+	overflow-x: hidden;
+}
+.screen.inOperation.vertical {
+	overflow-y: hidden;
+}
+.columns .column {
+	position: absolute;
+}
+
+.columns .header:hover {
+	cursor: move;
+	filter: alpha(opacity = 80);
+	opacity: 0.8;
+}
+
+.columns .dummy-column {
+	border: 2px dashed #888 !important;
+	background-color: #ddd;
+	margin: 0 5px;
+	z-index: -1;
+	display: none;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!--<meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">-->
+
+  <script src="components/loader.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+
+  <script src="lib/jquery/jquery-2.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <link href="css/fullcalendar.min.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="js/moment.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="js/fullcalendar.min.js"></script>
+  <script type="text/javascript" src="js/locale-all.js"></script>
+  
+    
+</head>
+<body>
+    <ons-page id="calendar-page">
+        <ons-button id="pop-button2">メニューに戻る</ons-button>
+<div id="calendar">
+  <script>
+      $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                dayClick: function(date){ //イベントじゃないところをクリックしたとき(日をクリックしたとき)に実行
+                    //window.location.href = 'index.html';
+                    //navi.resetToPage('page2');
+                },
+            });
+        });      
+  </script>
+  test
+</div>      
+    </ons-page>
+</body>
+</html>
+
