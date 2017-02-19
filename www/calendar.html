@@ -6,13 +6,9 @@
   <!--<meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">-->
 
   <script src="components/loader.js"></script>
-  <script src="lib/onsenui/js/onsenui.min.js"></script>
-
   <script src="lib/jquery/jquery-2.js" type="text/javascript"></script>
-
+  
   <link rel="stylesheet" href="components/loader.css">
-  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
-  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
   <link rel="stylesheet" href="css/style.css">
 
   <link href="css/fullcalendar.min.css" rel="stylesheet" type="text/css">
@@ -20,26 +16,86 @@
   <script type="text/javascript" src="js/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/fullcalendar.min.js"></script>
   <script type="text/javascript" src="js/locale-all.js"></script>
-  
-    
-</head>
-<body>
-    <ons-page id="calendar-page">
-        <ons-button id="pop-button2">メニューに戻る</ons-button>
-<div id="calendar">
+
   <script>
       $(document).ready(function () {
             $('#calendar').fullCalendar({
-                dayClick: function(date){ //イベントじゃないところをクリックしたとき(日をクリックしたとき)に実行
-                    //window.location.href = 'index.html';
-                    //navi.resetToPage('page2');
+                //ヘッダーの設定
+                header: {
+                left: 'today month,basicWeek',
+                center: 'title',
+                right: 'prev next'
                 },
+                lang: 'ja',
+    /*            
+	// タイトルの書式
+	titleFormat: {
+	    month: 'YYYY年M月',
+	},
+	// ボタン文字列
+	buttonText: {
+	    prev:     '<',
+	    next:     '>',
+	    today:    '今日',
+	    month:    '月',
+        week:    '週',
+	},
+	// 月名称
+	monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+	// 月略称
+	monthNamesShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+	// 曜日名称
+	dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
+	// 曜日略称
+	dayNamesShort: ['日', '月', '火', '水', '木', '金', '土'],*/
+    
+                editable: true, // イベントを編集するか        
+                allDaySlot: false, // 終日表示の枠を表示するか
+                eventDurationEditable: false, // イベント期間をドラッグしで変更するかどうか
+                slotEventOverlap: false, // イベントを重ねて表示するか
+                selectable: true,
+                selectHelper: true,
+                
+                select: function(start, end, allDay) {
+                },
+                
+                eventClick: function(calEvent, jsEvent, view) {
+            		var title = prompt('予定を入力してください:', calEvent.title);
+        			if(title && title!=""){
+        				calEvent.title = title;
+        				calendar.fullCalendar('updateEvent', calEvent); //イベント（予定）の修正
+        			}else{
+        				calendar.fullCalendar("removeEvents", calEvent.id); //イベント（予定）の削除				
+        			}
+                },
+                
+                droppable: true,// イベントをドラッグできるかどうか
+                
+                eventRender: function(events, element) {
+                if(events.img){
+            	    $(element[0])  //imgプロパティが存在するイベントだけtitleを画像に差し替え
+            	    .css("border-color", "transparent")
+            	    .css("background-color", "transparent")
+            	    .html('<img class="photo"  src="'+events.img+'" />');
+            	}
+                },                
+                events: [            
+                {
+                title: 'イベント',                
+                start: '2017-02-14',
+                //img:"img/p0091_m.png"
+                }                
+                ]
             });
         });      
   </script>
-  test
-</div>      
-    </ons-page>
+
+</head>
+<body>
+    <div class="container">
+    <div id="calendar"></div>
+    <a href="index.html">戻ろう・・・</a>
+    </div>
 </body>
 </html>
 
